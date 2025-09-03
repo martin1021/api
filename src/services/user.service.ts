@@ -161,8 +161,10 @@ export class UserService {
   async loginUser(data: LoginUserInput): Promise<User> {
     // Find user by email
     const user = await prisma.user.findUnique({
-      where: { email: data.email },
-    });
+      where: {
+        email: data.email,
+      }
+    })
 
     if (!user) {
       throw unauthorized('Invalid email or password');
